@@ -97,20 +97,18 @@ class DLL:
   def insert_at_start(self, item):
     node = Node(item, self.head)
     if self.is_empty():
-      self.head = self.tail = node
+      self.tail = node
     else:
       self.head.prev = node
-      self.head = node
+    self.head = node
     self.size += 1
   
   def insert_at_last(self, item):
-    node = Node(item)
     if self.is_empty():
-      self.head = self.tail = node
-      self.size += 1
+      self.insert_at_start(item)
       return 
+    node = Node(item, self.tail)
     self.tail.next = node
-    node.prev = self.tail
     self.tail = node
     self.size += 1
 
