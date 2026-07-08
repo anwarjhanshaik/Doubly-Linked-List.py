@@ -13,15 +13,11 @@ class DLL:
   def __str__(self):
     if self.is_empty():
       return "List is empty"
-    current = self.head
-    result = "=== LIST ITEMS ===\n"
-    while current:
-      if not current.next:
-        result += f"{current.data} --> None"
-        return result 
-      result += f"{current.data} <--> "
-      current = current.next
-  
+    result = []
+    for node in self:
+      result.append(str(node))
+    return f"=== LIST ITEMS ===\n{' <-> '.join(result)} -> None"
+    
   def __iter__(self):
     return DllIterator(self.head)
   
