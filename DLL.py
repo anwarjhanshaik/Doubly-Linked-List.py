@@ -108,6 +108,7 @@ class DLL:
     self.tail = node
     self.size += 1
 
+  #Use the search method to provide the address
   def insert_after(self, address, item):
     if address:
       node = Node(item, address.next, address)
@@ -121,22 +122,37 @@ class DLL:
   def delete_first(self):
     if self.is_empty():
       return 
+    del_node = self.head.data
     self.head = self.head.next
     if self.head:
       self.head.prev = None
     else:
       self.tail = None
     self.size -= 1
+    return del_node
   
   def delete_last(self):
     if self.is_empty():
       return 
+    del_node = self.tail.data
     self.tail = self.tail.prev
     if self.tail:
       self.tail.next = None
     else:
       self.head = None
     self.size -= 1
+    return del_node
+    
+  #Use the search method to provide the address 
+  def delete_after(self, address):
+    if address and address.next:
+      if address.next == self.tail:
+        return self.delete_at_last()
+      del_node = address.next.data
+      address.next.next.prev = address
+      address.next = address.next.next
+      self.size -= 1
+      return del_node
   
   def delete_item(self, item):
     if self.is_empty():
