@@ -155,27 +155,13 @@ class DLL:
       return del_node
   
   def delete_item(self, item):
-    if self.is_empty():
-      return
-    if self.head.data == item:
-      self.head = self.head.next
-      if self.head:
-        self.head.prev = None
-      else:
-        self.tail = None
-      self.size -= 1
-      return 
-    current = self.head
-    while current.next:
-      if current.next.data == item:
-        current.next = current.next.next
-        if current.next:
-          current.next.prev = current 
-        else:
-          self.tail = current 
-        self.size -= 1
-        return 
-      current = current.next
+    node = self.search(item)
+    if node:
+      if node == self.head:
+        return self.delete_first()
+      if node == self.tail:
+        return self.delete_last()
+      return self.delete_after(node.prev)
       
   def delete_at_index(self, index):
     if self.is_empty() or index < 0 or index >= len(self):
