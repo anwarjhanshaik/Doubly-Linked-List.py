@@ -103,7 +103,7 @@ class DLL:
     if self.is_empty():
       self.insert_at_start(item)
       return 
-    node = Node(item, self.tail)
+    node = Node(item, prev=self.tail)
     self.tail.next = node
     self.tail = node
     self.size += 1
